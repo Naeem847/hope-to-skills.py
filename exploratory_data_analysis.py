@@ -92,3 +92,10 @@ fig1.show()
 # 2.histogram age distribution
 fig2=px.histogram(df,x="age",nbins=30,title="age distribution of passengers",labels={"age":"age"})
 print(fig2.show())
+# 3. Scatter plot fare vs Age
+fig3=px.scatter(df,x="age",y="fare",color="survived",title="fare vs age",labels={"age":"age","fare":"fare paid","survived":"survived"})
+fig3.show()
+# bar chart survival rate by class
+
+fig4=px.bar(df,x="Pclass",y="survived",color="Pclass",title="survival rate by Passenger class",labels={"Pclass":"passenger class","survived":"survivel rate"},barmode="group")
+print(fig4.show())
