@@ -2,7 +2,7 @@ import pandas as pd
 
 df = pd.read_csv("logistics_regrassions.csv")
 # df.to_csv("logistics_regrassions.csv")
-print(df.head)
+print(df.head())
 
 from sklearn.preprocessing import LabelEncoder,StandardScaler
 from sklearn.model_selection import train_test_split
@@ -46,4 +46,4 @@ print(classification_report(y_test, y_pred))
 # confusion matrix
 conf_matrix = confusion_matrix(y_test, y_pred)
 print("Confusion Matrix:")
-print(conf_matrix(y_test, y_pred))
+print(conf_matrix)
