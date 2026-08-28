@@ -43,3 +43,4 @@ print(classification_report(y_test,y_pred_svm))
 # confusion matrix
 print("\nconfusion matrix")
 print(confusion_matrix(y_test,y_pred_svm))
+print(confusion_matrix(y_test,y_pred_svm))
