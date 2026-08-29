@@ -1,13 +1,23 @@
 import pandas as pd
+
 from sklearn.preprocessing import StandardScaler
+
 from sklearn.model_selection import train_test_split
+
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+
 # load the dataset(update the file path to your local path)
+
 file_path="diabetes.csv"
+
 df=pd.read_csv(file_path)
+
 # display basic information
+
 print("dataset information")
+
 print(df.info())
+
 print("\nfirst 5 rows")
 print(df.head())
 # checking the missing value
