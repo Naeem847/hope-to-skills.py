@@ -58,10 +58,12 @@ print("boosting accuracy:",accuracy_score(y_test,y_pred_boost))
 from sklearn.ensemble import StackingClassifier
 from sklearn.linear_model import LogisticRegression
 # define Bsemodel
+
 base_model = [
     ('tree',DecisionTreeClassifier()),
     ('svm',SVC(probability=True)),
 ]
+
 # meta model is logistic regression
 stacking_model = StackingClassifier(estimators=base_model, final_estimator=LogisticRegression())
 stacking_model.fit(X_train,y_train)
