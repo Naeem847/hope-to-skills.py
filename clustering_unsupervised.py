@@ -6,11 +6,15 @@ import pandas as pd
 # load the iris datasets
 
 iris=load_iris()
+
 X=iris.data
+
 Y =iris.target
 # create a data frame a better visualization
+
 df=pd.DataFrame(data=X,columns=iris.feature_names)
 df['actual_label']=Y
+
 # applying kmeans clustering
 k=3
 kmeans=KMeans(n_clusters=k ,random_state=42)
