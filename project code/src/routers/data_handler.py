@@ -118,8 +118,8 @@ def query_pdf_data(uuid:uuid_pkg.UUID,query:str=Query(...,min_length=1)):
         "query": query,
         "llm_response": llm_response,
     }
-@router.delete("/delete/{uuid}")
-def delete_data(uuid:uuid_pkg.UUID):
+@router.delete("/delete/{uuid}", status_code=200)
+def delete_data(uuid: uuid_pkg.UUID):
     """
     delete the data associated with a specific uuid from the data store.
     """
@@ -134,3 +134,7 @@ def delete_data(uuid:uuid_pkg.UUID):
         "message": f"Data for UUID {uuid_str} deleted successfully.",
         "uuid": uuid_str,
     }
+@router.get("/list_uuids")
+def list_all_uuids():
+    """return a list of all uuids currently stired:"""
+    return {"uuids": list(data_store.keys())}

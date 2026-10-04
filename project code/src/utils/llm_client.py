@@ -31,9 +31,11 @@ def get_llm_response(context: str, query: str) -> str:
         ),
     ]
     generate_content_config=types.GenerateContentConfig(
-        responce_mime_type="text/plain",
-        system_instructions=[types.Part.from_text(text=("you are a helpful assistant that answers questions based on the provided context delimited by triple backticks.\n\n"
-        "you will be given a context and a user query your task is to generate an answer based on the context:\n\n: ```{context}```"
+        response_mime_type="text/plain",
+        system_instruction=[
+            types.Part.from_text(
+                text=("you are a helpful assistant that answers questions based on the provided context delimited by triple backticks.\n\n"
+        "you will be given a context and a user query your task is to generate an answer based on the context:\n\n"
         "relevent to the query based on the cntext provided. if the context does not contain the answer, respond with 'I don't know.\n\n"
         "information to answer the query, you should indicate that youdo not have enough information to answer the query.\n\n"
         "to provide a complete answer\n\n"
@@ -41,6 +43,21 @@ def get_llm_response(context: str, query: str) -> str:
         "enough information to answer the query\n\n"
         "you should always responce in a fiendly snd heplful manner,you should not make up answers if the context does not contain the answer to the query.\n\n"
         "personal openions or information in your responses\n\n"
-        "you should not provide any personal opinions or information in your responses\n\n: f"Context:\n```{context}```"))]
+        "you should not provide any personal opinions or information in your responses\n\n:"f"Context:\n```{context}```"
+           )
+        ),
+    ],
 
     )
+    # stream and accumulate the response
+    response_text=""
+    for chunk in client.models.generate_content_stream(
+        model=model,
+        contents=contents,
+        config=generate_content_config,
+    ):
+        if chunk.type == types.ComputeTokensResponse.ChunkType.RESPONSE:
+
+            response_text += chunk.text
+
+    return response_text

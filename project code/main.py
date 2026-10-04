@@ -44,6 +44,7 @@ def read_root():
     return HTMLResponse(content=html_content,status_code=200)
 
 if __name__=="__main__":
+ 
  import uvicorn
 # run the Fastapi APP using uvicorn
  uvicorn.run(
