@@ -1,4 +1,4 @@
-from fastapi import APIRouter,UploadFile,file,HTTPException,Query
+from fastapi import APIRouter,UploadFile,File,HTTPException,Query
 
 import uuid as uuid_pkg # Use alies to avoid conflicts with path parameter name
 
@@ -12,7 +12,7 @@ from src.data_store import data_store
 from src.utils.pdf_processor import extract_text_from_pdf
 
 # llm client utility 
-from src.utils.llm_client import get_llm_responce, get_llm_response
+from src.utils.llm_client import get_llm_response, get_llm_response
 
 router = APIRouter()
 
@@ -22,7 +22,7 @@ UPLOAD_DIR="/tmp/cag_uploads"
 os.makedirs(UPLOAD_DIR,exist_ok=True)
 @router.post("/upload/{uuid}",status_code=201)
 
-def upload_pdf(uuid:uuid_pkg.UUID,file:UploadFile=file(...)):
+def upload_pdf(uuid:uuid_pkg.UUID,file:UploadFile=File(...)):
     """
     Upload a PDF file associated with a specific UUID.
     extract text from the pdf and store in in the data store
@@ -59,7 +59,7 @@ def upload_pdf(uuid:uuid_pkg.UUID,file:UploadFile=file(...)):
         if os.path.exists(file_path):
             os.remove(file_path)
 @router.put("/update/{uuid}")
-def update_pdf_data(uuid:uuid_pkg.UUID,file:UploadFile=file(...)):
+def update_pdf_data(uuid:uuid_pkg.UUID,file:UploadFile=File(...)):
     """
     append text extracted from a new pdf file to the existing data for a specific UUID in the data store.
     if the uuid does not exist, its raises an error.

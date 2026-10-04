@@ -12,6 +12,7 @@ app.include_router(
     prefix="/api/v1",
     tags=["Data Handling and Chat With PDF."],
 )
+
 @app.get("/",response_class=HTMLResponse,tags=["root"])
 def read_root():
     """
@@ -46,6 +47,7 @@ def read_root():
 if __name__=="__main__":
  
  import uvicorn
+ 
 # run the Fastapi APP using uvicorn
  uvicorn.run(
    app,host="127.0.0.1",port=8001
