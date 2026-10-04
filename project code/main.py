@@ -6,7 +6,7 @@ app=FastAPI(
     title="CAG Project API Chatwith your PDF.",
     description="API for uploading PDFs, quering content via LLM,and managing data.",
     version="0.1.0",
-)
+)       
 app.include_router(
     data_handler.router,
     prefix="/api/v1",
